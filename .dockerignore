@@ -1,0 +1,7 @@
+**/obj
+**/bin
+.vscode
+*.http
+.git
+CLAUDE.md
+data

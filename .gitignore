@@ -1,0 +1,9 @@
+bin/
+obj/
+.env
+data/
+TestResults/
+.sonarqube/
+.vs/
+*.user
+*.db
