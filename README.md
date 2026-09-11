@@ -187,7 +187,8 @@ Ver `.env.example`. Principais: `RABBITMQ_USER`/`RABBITMQ_PASSWORD`, `JWT_SECRET
 ```bash
 dotnet test
 ```
-
+- `tests/E2E.Tests` — Testes ponta a ponta reais
+- `tests/Gateway.API.Tests` — Testes específicos do Gateway, atualmente possuindo apenas um teste de RateLimit
 - `tests/Order.Application.Tests` — testes unitários dos handlers CQRS (com Moq), incluindo idempotência e as regras de cancelamento.
 - `tests/Order.API.IntegrationTests` — testes de integração com `WebApplicationFactory` contra um SQLite em memória.
 
@@ -219,8 +220,3 @@ dotnet build
 dotnet-sonarscanner end /d:sonar.token="<seu-token>"
 ```
 
-Cada instância do SonarQube tem sua própria base de tokens — um token gerado numa instância não funciona em outra (mesmo com o mesmo `sonar.host.url`), por isso não há um token fixo aqui: gere o seu a cada instância nova subida via `docker compose`.
-
-**Rodando em Git Bash/MSYS (não em PowerShell/cmd):** dois problemas conhecidos nesse shell, não no scanner em si —
-- O MSYS "corrige" `/k:...` como se fosse um caminho Unix e quebra a barra, resultando em `A required argument is missing: /key:...`. Contorne prefixando o comando com `MSYS_NO_PATHCONV=1`, ou rode em PowerShell/cmd.exe, onde isso não acontece.
-- Se o caminho do projeto tiver acento (como este: `.../Área de Trabalho/...`) e o code page ativo do console não for UTF-8, o scanner falha ao criar `.sonarqube/conf` com `Access to the path ... is denied` (o acento vira `�` internamente). Rode `chcp 65001` antes, no mesmo terminal.
